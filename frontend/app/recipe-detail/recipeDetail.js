@@ -9,7 +9,7 @@ angular.module('myApp.recipeDetail', ['ngRoute'])
         });
     }])
 
-    .controller('RecipeDetailCtrl', ['$scope', '$routeParams', 'Restangular', function ($scope, $routeParams, Restangular) {
+    .controller('RecipeDetailCtrl', ['$scope', '$routeParams', '$location', 'Restangular', function ($scope, $routeParams, $location, Restangular) {
         $scope.recipeId = $routeParams.recipeId;
 
         Restangular.one('recipes', $scope.recipeId).customGET()
@@ -20,5 +20,22 @@ angular.module('myApp.recipeDetail', ['ngRoute'])
                 function() {
                     alert('There was a problem');
                 }
-            )
+            );
+        $scope.deleteRecipe = function () {
+            var confirmation = confirm("Are you sure you want to delete this recipe? This cannot be undone.");
+
+            if (confirmation){
+                Restangular.one('recipes', $scope.recipeId).customDELETE()
+                    .then(
+                        function () {
+                            alert("Your recipe was successfully deleted!");
+                            $location.path('/recipes');
+                        },
+                        function () {
+                            alert('There was a problem deleting the recipe.');
+                        }
+                    )
+            }
+        }
+
     }]);

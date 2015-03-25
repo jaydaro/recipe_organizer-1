@@ -13,4 +13,5 @@ angular.module('myApp', [
         $routeProvider.otherwise({redirectTo: '/recipes'});
 
         RestangularProvider.setBaseUrl('http://localhost:8001');
+        RestangularProvider.setRequestSuffix('/');
     }]);
