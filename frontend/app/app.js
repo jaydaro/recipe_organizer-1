@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.recipes',
     'myApp.recipeDetail',
+    'myApp.addRecipe',
     'myApp.view2',
     'myApp.version',
     'restangular'
