@@ -1,4 +1,14 @@
 <input ng-model="recipe.name" placeholder="Recipe Name">
 <textarea ng-model="recipe.directions" placeholder="Recipe Directions"></textarea>
 <textarea ng-model="recipe.description" placeholder="Recipe Description"></textarea>
+<input placeholder="Ingredient" ng-model="ingredientName">
+<button class="btn btn-info btn-sm" ng-click="addIngredientToRecipe(ingredientName)">
+    <span class="glyphicon glyphicon-plus"></span> Add Ingredient to Recipe
+</button>
+
+<p>Your Ingredients:</p>
+<ol>
+    <li ng-repeat="ingredient in recipe.ingredients">{{ ingredient.name }}</li>
+</ol>
+
 <button ng-click="addRecipe()">Add Recipe</button>
