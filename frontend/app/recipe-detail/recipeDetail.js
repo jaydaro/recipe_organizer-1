@@ -12,6 +12,8 @@ angular.module('myApp.recipeDetail', ['ngRoute'])
     .controller('RecipeDetailCtrl', ['$scope', '$routeParams', '$location', 'Restangular', function ($scope, $routeParams, $location, Restangular) {
         $scope.recipeId = $routeParams.recipeId;
 
+        $scope.editing = false;
+
         Restangular.one('recipes', $scope.recipeId).customGET()
             .then(
                 function (recipe) {
@@ -36,6 +38,19 @@ angular.module('myApp.recipeDetail', ['ngRoute'])
                         }
                     )
             }
+        };
+
+        $scope.saveEditedRecipe = function () {
+            Restangular.one('recipes', $scope.recipeId).customPUT($scope.recipe)
+                .then(
+                    function () {
+                        $scope.editing = false;
+                        alert("Your recipe was successfully updated");
+                    },
+                    function () {
+                        alert("There was a problem updating your recipe");
+                    }
+            )
         }
 
     }]);
