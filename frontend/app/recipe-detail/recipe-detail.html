@@ -7,8 +7,17 @@
 <p ng-hide="editing">{{ recipe.directions }}</p>
 <textarea ng-show="editing" ng-model="recipe.directions"></textarea>
 
+<span ng-show="editing">
+    <input placeholder="Ingredient" ng-model="ingredientName">
+    <button class="btn btn-info btn-sm" ng-click="addIngredientToRecipe(ingredientName)">
+        <span class="glyphicon glyphicon-plus"></span> Add Ingredient to Recipe
+    </button>
+</span>
+
 <ol>
-    <li ng-repeat="ingredient in recipe.ingredients">{{ ingredient.name }}</li>
+    <li ng-repeat="ingredient in recipe.ingredients">{{ ingredient.name }}
+        <i ng-click="removeIngredientFromRecipe(ingredient)" ng-show="editing" class="btn btn-xs btn-danger glyphicon glyphicon-remove"></i>
+    </li>
 </ol>
 
 

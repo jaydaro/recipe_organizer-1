@@ -23,6 +23,20 @@ angular.module('myApp.recipeDetail', ['ngRoute'])
                     alert('There was a problem');
                 }
             );
+
+        $scope.removeIngredientFromRecipe = function (ingredient){
+            var index = $scope.recipe.ingredients.indexOf(ingredient);
+            if (index != -1) {
+                $scope.recipe.ingredients.splice(index, 1);
+            }
+        };
+
+        $scope.addIngredientToRecipe = function(ingredientName) {
+            var ingredient = {name: ingredientName};
+            $scope.recipe.ingredients.push(ingredient);
+            $scope.ingredientName = '';
+        };
+
         $scope.deleteRecipe = function () {
             var confirmation = confirm("Are you sure you want to delete this recipe? This cannot be undone.");
 
